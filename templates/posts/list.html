@@ -1,0 +1,20 @@
+{ % extends "base.html" % }
+{ % block content % }
+
+<h1>Posts</h1>
+<form hx-post="/posts/create" hx-target="#post-list" hx-swap="beforeend">
+    <input type="text" name="title" placeholder="Title" required>
+    <input type="text" name="content" placeholder="Content" required>
+    <input type="number" name="user_id" placeholder="User ID" required>
+    <button type="submit">Add Post</button>
+</form>
+<ul id="post-list">
+    {% for post in posts %}
+    <li id="post-{{ post.id }}">
+        <a href="/posts/edit/{{ post.id }}" hx-get="/posts/edit/{{ post.id }}" hx-target="#post-{{ post.id }}" hx-swap="outerHTML">Edit</a>
+        <button hx-post="/posts/delete/{{ post.id }}" hx-target="#post-{{ post.id }}" hx-swap="outerHTML">Delete</button>
+        {{ post.title }} ({{ post.content }})
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

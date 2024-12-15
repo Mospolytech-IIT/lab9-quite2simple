@@ -1,0 +1,5 @@
+<form hx-post="/posts/update/{{ post.id }}" hx-target="#post-{{ post.id }}" hx-swap="outerHTML">
+    <input type="text" name="title" value="{{ post.title }}" required>
+    <input type="text" name="content" value="{{ post.content }}" required>
+    <button type="submit">Save</button>
+  </form>
