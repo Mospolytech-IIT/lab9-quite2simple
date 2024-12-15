@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Users</h1>
+<form hx-post="/users/create" hx-target="#user-list" hx-swap="beforeend">
+  <input type="text" name="name" placeholder="Name" required>
+  <input type="email" name="email" placeholder="Email" required>
+  <button type="submit">Add User</button>
+</form>
+<ul id="user-list">
+  {% for user in users %}
+  <li id="user-{{ user.id }}">
+    {{ user.name }} ({{ user.email }})
+    <a href="/users/edit/{{ user.id }}" hx-get="/users/edit/{{ user.id }}" hx-target="#user-{{ user.id }}" hx-swap="outerHTML">Edit</a>
+    <button hx-post="/users/delete/{{ user.id }}" hx-target="#user-{{ user.id }}" hx-swap="outerHTML">Delete</button>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}

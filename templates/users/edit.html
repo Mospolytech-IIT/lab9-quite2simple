@@ -1,0 +1,6 @@
+<form hx-post="/users/update/{{ user.id }}" hx-target="#user-{{ user.id }}" hx-swap="outerHTML">
+    <input type="text" name="name" value="{{ user.name }}" required>
+    <input type="email" name="email" value="{{ user.email }}" required>
+    <button type="submit">Save</button>
+  </form>
+  
