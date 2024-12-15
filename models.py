@@ -20,7 +20,10 @@ class User(Base):
     username = Column(String(50), unique=True)
     email = Column(String(50), unique=True)
     password = Column(String(50))
-    posts = relationship('Post', back_populates='owner')
+    posts = relationship('Post', back_populates='owner', cascade='all, delete')
+
+    def __repr__(self):
+        return f'User(id={self.id}, username={self.username}, email={self.email})'
 
 class Post(Base):
     """
@@ -33,3 +36,6 @@ class Post(Base):
     content = Column(String(2000))
     user_id = Column(Integer, ForeignKey('users.id'))
     owner = relationship('User')
+
+    def __repr__(self):
+        return f'Post(id={self.id}, title={self.title}, content={self.content}, user_id={self.user_id})'
